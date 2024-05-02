@@ -1,11 +1,6 @@
 import os
 import json
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from jinja2 import Template
-from Functions import emailCode
-from keys import secrets
 import Functions
 
 def registrar_usuario():
@@ -25,9 +20,21 @@ def registrar_usuario():
     ):
         verify = True
 
+
+    #PROBLEMA NA VERIFICACAO DA SENHA CONCERTAR DEPOIS
+
     while verify is True:
         print("A senha deve conter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.")
         senha = input("Digite sua senha: ")
+        if (
+        len(senha) > 8
+        or any(char.isupper() for char in senha)
+        or any(char in "!@#$%^&*()-_+=~`'\";:/?.,<>{}[]|\\"
+            for char in senha)
+    ):
+            verify = False
+
+
 
     # Salva as informações do usuário em um arquivo JSON
     novo_usuario = {
@@ -52,6 +59,10 @@ def registrar_usuario():
 
     with open(arquivo_registros, "w") as f:
         json.dump(registros, f, indent=4)
+
+    input("REGISTRTADO! PRESSIONE ENTER PARA VOLTAR PARA O MENU...")
+    os.system("cls" or "clear")
+    menu_principal()
 
 
 
