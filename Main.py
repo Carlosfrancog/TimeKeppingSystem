@@ -114,4 +114,4 @@ class Main:
                 break
     
 
-main = Main()
+

@@ -26,6 +26,24 @@
             "Horario de saida": "18:00 pm",
             "Horario de almoco": "13:00 pm",
             "ID": "818434"
+        },
+        {
+            "Nome": "a",
+            "Cargo": "a",
+            "Jornada de trabalho": "a",
+            "Horario de entrada": "a",
+            "Horario de saida": "a",
+            "Horario de almoco": "a",
+            "ID": "836691"
+        },
+        {
+            "Nome": "GABRIEL MACHO",
+            "Cargo": "DONO",
+            "Jornada de trabalho": "01:00",
+            "Horario de entrada": "11:00",
+            "Horario de saida": "12:00",
+            "Horario de almoco": "12:00",
+            "ID": "164975"
         }
     ]
 }
