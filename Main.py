@@ -112,6 +112,8 @@ class Main:
                     input("prssionne Enter para voltar para o menu.")
             elif menu == "4":
                 break
+            elif menu == '5': #TESTE
+                timeKeeping.mark_time()
     
 
 

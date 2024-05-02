@@ -42,6 +42,18 @@
                 "registro": "164975",
                 "data_hora": "2024-05-02 01:40:13",
                 "tipo": "entrada"
+            },
+            {
+                "nome_fincionario": "GABRIEL MACHO",
+                "registro": "164975",
+                "data_hora": "2024-05-02 02:04:21",
+                "tipo": "almoco"
+            },
+            {
+                "nome_fincionario": "GABRIEL MACHO",
+                "registro": "164975",
+                "data_hora": "2024-05-02 02:04:54",
+                "tipo": "saida"
             }
         ]
     }
