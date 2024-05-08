@@ -98,6 +98,7 @@ class Main:
         [4] SAIR
 :'''))[0]
             
+            
             if menu == "1":
                         os.system('cls' or 'clear')
                         employee = RegistersEmployee("", "", "", "", "", "")
@@ -114,6 +115,8 @@ class Main:
                 break
             elif menu == '5': #TESTE
                 timeKeeping.mark_time()
+
+    os.system('cls' or 'clear')
     
 
 

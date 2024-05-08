@@ -1,0 +1,60 @@
+{
+    "721041": {
+        "2024-04-27": [
+            {
+                "nome_fincionario": "Lais Caroline Valente De Carvalho",
+                "registro": "721041",
+                "data_hora": "2024-04-27 17:34:43",
+                "tipo": "entrada"
+            },
+            {
+                "nome_fincionario": "Lais Caroline Valente De Carvalho",
+                "registro": "721041",
+                "data_hora": "2024-04-27 17:35:28",
+                "tipo": "almoco"
+            }
+        ]
+    },
+    "554829": {
+        "2024-04-27": [
+            {
+                "nome_fincionario": "Carlos Eduardo Franco Gabriel",
+                "registro": "554829",
+                "data_hora": "2024-04-27 17:42:07",
+                "tipo": "entrada"
+            }
+        ]
+    },
+    "818434": {
+        "2024-04-27": [
+            {
+                "nome_fincionario": "Fulano da Silva Junior",
+                "registro": "818434",
+                "data_hora": "2024-04-27 17:50:15",
+                "tipo": "entrada"
+            }
+        ]
+    },
+    "164975": {
+        "2024-05-02": [
+            {
+                "nome_fincionario": "GABRIEL MACHO",
+                "registro": "164975",
+                "data_hora": "2024-05-02 01:40:13",
+                "tipo": "entrada"
+            },
+            {
+                "nome_fincionario": "GABRIEL MACHO",
+                "registro": "164975",
+                "data_hora": "2024-05-02 02:04:21",
+                "tipo": "almoco"
+            },
+            {
+                "nome_fincionario": "GABRIEL MACHO",
+                "registro": "164975",
+                "data_hora": "2024-05-02 02:04:54",
+                "tipo": "saida"
+            }
+        ]
+    }
+}

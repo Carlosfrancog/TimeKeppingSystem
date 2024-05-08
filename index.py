@@ -103,6 +103,7 @@ def menu_principal():
     --------------------
 :""")
     while quest not in "123":
+        os.system('cls' or 'clear')
         quest = input("""
     ____________________
     |   REGISTRAR  [1] |
@@ -110,6 +111,7 @@ def menu_principal():
     |     SAIR     [3] |
     --------------------
 :""")
+    
 
     if quest == "1":
         registrar_usuario()
