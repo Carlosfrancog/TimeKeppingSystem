@@ -1,6 +1,6 @@
 import os
 import json
-from Main import Main
+from MainCode import MainClass
 
 def registrar_usuario():
     os.system("cls" or "clear")
@@ -85,7 +85,7 @@ def fazer_login():
         if usuario["email"] == email_login and usuario["senha"] == senha_login:
             print("Login bem-sucedido!")
             input("Pressione ENTER para ir para o menu...")
-            Main()  # Chamando a classe Main
+            MainClass()  # Chamando a classe Main
             return
 
     # Se não encontrar correspondência, exibir mensagem de erro e voltar para o menu
