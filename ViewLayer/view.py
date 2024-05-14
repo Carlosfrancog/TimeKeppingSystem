@@ -10,12 +10,12 @@ class InterfaceGrafica:
         self.root = root
         self.root.title("Sistema de Registro e Login")
         self.root.geometry("500x550")
-        
+
         self.create_initial_frame()
 
     def create_initial_frame(self):
         self.clear_frame()
-        
+
         self.label = tk.Label(self.root, text="Escolha uma opção:", bg="#e6e6fa", font=("Arial", 14))
         self.label.pack(pady=20)
 
@@ -25,8 +25,12 @@ class InterfaceGrafica:
         self.login_button = tk.Button(self.root, text="Login", command=self.login, font=("Arial", 12))
         self.login_button.pack(pady=10, ipadx=20, ipady=10)  # Aumentando o tamanho do botão
 
-        self.sair_button = tk.Button(self.root, text="Sair", command=self.sair, font=("Arial", 12))
+        self.sair_button = tk.Button(self.root, text="Sair", command=self.killProgram, font=("Arial", 12))
         self.sair_button.pack(pady=10, ipadx=20, ipady=10)  # Aumentando o tamanho do botão
+
+    def killProgram(self):
+        self.root.quit()
+        print('Saiu')
 
     def registrar(self):
         self.clear_frame()
@@ -234,6 +238,7 @@ class InterfaceGrafica:
             novo_id = self.gerar_novo_id()
 
         novo_funcionario = {
+            "index": 0,  # Inicializando o índice com 0
             "Nome": nome,
             "Cargo": cargo,
             "Jornada de Trabalho": jornada_trabalho,
@@ -250,6 +255,9 @@ class InterfaceGrafica:
             except (FileNotFoundError, json.JSONDecodeError):
                 registros = []
 
+            # Definindo o índice para o próximo registro
+            novo_funcionario["index"] = len(registros)
+
             registros.append(novo_funcionario)
 
             f.seek(0)
@@ -257,6 +265,7 @@ class InterfaceGrafica:
 
         messagebox.showinfo("Sucesso", "Funcionário registrado com sucesso!")
         self.show_menu_principal()
+
 
     def gerar_novo_id(self):
         return ''.join(str(randint(0, 9)) for _ in range(6))
@@ -345,8 +354,6 @@ class InterfaceGrafica:
         messagebox.showerror("Erro", f"Nenhum funcionário encontrado com o ID {search_id}.")
 
     def exibir_proximo_funcionario(self):
-        search_id = self.search_entry.get()
-
         arquivo_registros = "ViewLayer/Funcionarios.json"
         if os.path.exists(arquivo_registros) and os.path.getsize(arquivo_registros) > 0:
             with open(arquivo_registros, "r") as f:
@@ -356,43 +363,36 @@ class InterfaceGrafica:
                     registros = []
         else:
             registros = []
-
-        # Se o campo de pesquisa está vazio, carrega o primeiro funcionário
-        if not search_id:
-            if registros:
-                funcionario = registros[0]
-                self.text_area.config(state="normal")  # Habilita a área de texto para escrita temporariamente
-                self.text_area.delete("1.0", tk.END)  # Limpa a área de texto
-                self.text_area.insert(tk.END, f"ID: {funcionario['ID']}\n")
-                self.text_area.insert(tk.END, f"Nome: {funcionario['Nome']}\n")
-                self.text_area.insert(tk.END, f"Cargo: {funcionario['Cargo']}\n")
-                self.text_area.insert(tk.END, f"Jornada de Trabalho: {funcionario['Jornada de Trabalho']}\n")
-                self.text_area.insert(tk.END, f"Horário de Entrada: {funcionario['Horario de Entrada']}\n")
-                self.text_area.insert(tk.END, f"Horário de Saída: {funcionario['Horario de Saida']}\n")
-                self.text_area.insert(tk.END, f"Horário de Almoço: {funcionario['Horario de Almoco']}\n")
-                self.text_area.config(state="disabled")  # Volta a desabilitar a área de texto
-            else:
-                messagebox.showerror("Erro", "Nenhum funcionário cadastrado ainda.")
+    
+        # Se não houver registros, exibe uma mensagem de erro
+        if not registros:
+            messagebox.showerror("Erro", "Nenhum funcionário cadastrado ainda.")
             return
-
-        next_index = 0
-        for i, funcionario in enumerate(registros):
-            if funcionario["ID"] == search_id:
-                next_index = (i + 1) % len(registros)
-                break
-
-        funcionario = registros[next_index]
-        self.text_area.config(state="normal")  # Habilita a área de texto para escrita temporariamente
-        self.text_area.delete("1.0", tk.END)  # Limpa a área de texto
-        self.text_area.insert(tk.END, f"ID: {funcionario['ID']}\n")
-        self.text_area.insert(tk.END, f"Nome: {funcionario['Nome']}\n")
-        self.text_area.insert(tk.END, f"Cargo: {funcionario['Cargo']}\n")
-        self.text_area.insert(tk.END, f"Jornada de Trabalho: {funcionario['Jornada de Trabalho']}\n")
-        self.text_area.insert(tk.END, f"Horário de Entrada: {funcionario['Horario de Entrada']}\n")
-        self.text_area.insert(tk.END, f"Horário de Saída: {funcionario['Horario de Saida']}\n")
-        self.text_area.insert(tk.END, f"Horário de Almoço: {funcionario['Horario de Almoco']}\n")
-        self.text_area.config(state="disabled")  # Volta a desabilitar a área de texto
-
+    
+        # Obtém o índice atual do funcionário exibido
+        current_index = getattr(self, 'current_index', 0)
+    
+        # Obtém o próximo índice
+        next_index = (current_index + 1) % len(registros)
+    
+        # Obtém o próximo funcionário
+        proximo_funcionario = registros[next_index]
+    
+        # Exibe as informações do próximo funcionário na tela
+        self.text_area.config(state="normal")
+        self.text_area.delete("1.0", tk.END)
+        self.text_area.insert(tk.END, f"ID: {proximo_funcionario['ID']}\n")
+        self.text_area.insert(tk.END, f"Nome: {proximo_funcionario['Nome']}\n")
+        self.text_area.insert(tk.END, f"Cargo: {proximo_funcionario['Cargo']}\n")
+        self.text_area.insert(tk.END, f"Jornada de Trabalho: {proximo_funcionario['Jornada de Trabalho']}\n")
+        self.text_area.insert(tk.END, f"Horário de Entrada: {proximo_funcionario['Horario de Entrada']}\n")
+        self.text_area.insert(tk.END, f"Horário de Saída: {proximo_funcionario['Horario de Saida']}\n")
+        self.text_area.insert(tk.END, f"Horário de Almoço: {proximo_funcionario['Horario de Almoco']}\n")
+        self.text_area.config(state="disabled")
+    
+        # Atualiza o índice atual do funcionário exibido
+        self.current_index = next_index
+    
     def lista_ponto(self):
         self.clear_frame()
 
@@ -465,7 +465,7 @@ class InterfaceGrafica:
 
     def sair(self):
         self.clear_frame()
-        self.show_initial_frame()
+        self.create_initial_frame()
 
     def clear_frame(self):
         # Limpa todos os widgets do frame
@@ -480,4 +480,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = InterfaceGrafica(root)
     root.mainloop()
-

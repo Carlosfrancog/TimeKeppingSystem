@@ -4,5 +4,17 @@
         "email": "Admin",
         "telefone": "Admin",
         "senha": "Admin"
+    },
+    {
+        "nome": "Carlos Gabriel",
+        "email": "a",
+        "telefone": "a",
+        "senha": "@A12345678"
+    },
+    {
+        "nome": "Admin",
+        "email": "@admin",
+        "telefone": "9999999999",
+        "senha": "@Admin123"
     }
 ]
