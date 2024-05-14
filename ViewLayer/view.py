@@ -5,28 +5,40 @@ import os
 import json
 import re
 
+
 class InterfaceGrafica:
     def __init__(self, root):
         self.root = root
-        self.root.title("Sistema de Registro e Login")
+        self.root.iconbitmap("./ViewLayer/images/icon.ico")
+        self.root.title("TimeKeeping BETA DEV VERSION CONFIDENTIAL")
         self.root.geometry("500x550")
+        self.root.configure(background="#99ccff")
 
         self.create_initial_frame()
 
     def create_initial_frame(self):
         self.clear_frame()
 
-        self.label = tk.Label(self.root, text="Escolha uma opção:", bg="#e6e6fa", font=("Arial", 14))
-        self.label.pack(pady=20)
+        # Criando um frame para os botões
+        button_frame = tk.Frame(self.root, bg="#99ccff")  # Cor de fundo personalizada
+        button_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)  # Posiciona o frame no centro da janela
 
-        self.registrar_button = tk.Button(self.root, text="Registrar", command=self.registrar, font=("Arial", 12))
-        self.registrar_button.pack(pady=10, ipadx=20, ipady=10)  # Aumentando o tamanho do botão
+        self.label = tk.Label(button_frame, text="Escolha uma opção:", font=("Arial", 14))
+        self.label.pack()
 
-        self.login_button = tk.Button(self.root, text="Login", command=self.login, font=("Arial", 12))
-        self.login_button.pack(pady=10, ipadx=20, ipady=10)  # Aumentando o tamanho do botão
+        # Botão Registrar
+        self.registrar_button = tk.Button(button_frame, text="Registrar", command=self.registrar, font=("Arial", 12))
+        self.registrar_button.pack(pady=10, ipadx=20, ipady=10, fill=tk.BOTH, expand=True)
 
-        self.sair_button = tk.Button(self.root, text="Sair", command=self.killProgram, font=("Arial", 12))
-        self.sair_button.pack(pady=10, ipadx=20, ipady=10)  # Aumentando o tamanho do botão
+        # Botão Login
+        self.login_button = tk.Button(button_frame, text="Login", command=self.login, font=("Arial", 12))
+        self.login_button.pack(pady=10, ipadx=20, ipady=10, fill=tk.BOTH, expand=True)
+
+        # Botão Sair
+        self.sair_button = tk.Button(button_frame, text="Sair", command=self.killProgram, font=("Arial", 12))
+        self.sair_button.pack(pady=10, ipadx=20, ipady=10, fill=tk.BOTH, expand=True)
+
+
 
     def killProgram(self):
         self.root.quit()
@@ -160,7 +172,7 @@ class InterfaceGrafica:
         self.clear_frame()
 
         # Adiciona um frame para conter os botões do menu principal
-        menu_frame = tk.Frame(self.root, bg="#dcdcdc")
+        menu_frame = tk.Frame(self.root, bg="#99ccff")
         menu_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
         # Define o tamanho e o estilo dos botões do menu
@@ -363,21 +375,21 @@ class InterfaceGrafica:
                     registros = []
         else:
             registros = []
-    
+
         # Se não houver registros, exibe uma mensagem de erro
         if not registros:
             messagebox.showerror("Erro", "Nenhum funcionário cadastrado ainda.")
             return
-    
+
         # Obtém o índice atual do funcionário exibido
         current_index = getattr(self, 'current_index', 0)
-    
+
         # Obtém o próximo índice
         next_index = (current_index + 1) % len(registros)
-    
+
         # Obtém o próximo funcionário
         proximo_funcionario = registros[next_index]
-    
+
         # Exibe as informações do próximo funcionário na tela
         self.text_area.config(state="normal")
         self.text_area.delete("1.0", tk.END)
@@ -389,10 +401,10 @@ class InterfaceGrafica:
         self.text_area.insert(tk.END, f"Horário de Saída: {proximo_funcionario['Horario de Saida']}\n")
         self.text_area.insert(tk.END, f"Horário de Almoço: {proximo_funcionario['Horario de Almoco']}\n")
         self.text_area.config(state="disabled")
-    
+
         # Atualiza o índice atual do funcionário exibido
         self.current_index = next_index
-    
+
     def lista_ponto(self):
         self.clear_frame()
 
